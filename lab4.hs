@@ -9,16 +9,13 @@ getUppercaseChars :: String -> [String]
 getUppercaseChars str = map (:[]) $ filter isUpper str
 
 
--- Визначення структури для збереження лівої та правої частин рядка
 data Line = Line { left :: String, right :: String } deriving (Show)
 
--- Функція для розбиття рядка за сепаратором та створення структури Line
 parseLine :: String -> Line
 parseLine str =
     let (leftPart, _:rightPart) = break (== '>') str
     in Line leftPart rightPart
 
--- Функція для зчитування файлу та розбиття кожного рядка на структуру Line
 readLinesFromFile :: FilePath -> IO [Line]
 readLinesFromFile filePath = do
     contents <- readFile filePath
@@ -41,7 +38,7 @@ findUnreachable start lines = nub $ findUnreachable' [start] [] where
                           relevantLines = getRightByLeft x lines
                           newNonTerminals = nub $ filter (`notElem` newVisited) $ concatMap getUppercaseChars relevantLines
                       in findUnreachable' (xs ++ newNonTerminals) newVisited
--- Приклад використання:
+
 main :: IO ()
 main = do
     lines <- readLinesFromFile "grammar.txt"
