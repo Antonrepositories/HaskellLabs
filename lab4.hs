@@ -46,7 +46,18 @@ main :: IO ()
 main = do
     lines <- readLinesFromFile "grammar.txt"
     mapM_ print lines
+    let firstElem = left (head lines)
+    putStrLn "All non-terminals:"
+    let allNonterminals = nub $ map left lines
+    print allNonterminals
     putStrLn "Reachable non-terminals:"
-    let rightValues = getRightByLeft "S" lines
-    --print rightValues
-    print $ findUnreachable "S" lines
+    --let reachableNonterminals = findUnreachable "S" lines
+    let reachableNonterminals = findUnreachable firstElem lines
+    print $ reachableNonterminals
+    --print $ findUnreachable "S" lines
+    putStrLn "Unreachable non-terminals:"
+    let unreachableNonterminals = filter (`notElem` reachableNonterminals) allNonterminals
+    print unreachableNonterminals
+    let filteredLines = filter (\line -> left line `elem` reachableNonterminals) lines
+    putStrLn "New grammar:"
+    mapM_ print filteredLines
