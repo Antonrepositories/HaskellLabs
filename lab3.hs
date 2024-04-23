@@ -70,6 +70,6 @@ main = do
           initialState = "0",
           finalStates = finalStates1 
         }
-      maxLen = length transitions1 + 5
+      maxLen = length transitions1 + 1
       acceptsEven = acceptsEvenLength automaton alphabet maxLen
   putStrLn $ "Does the automaton accept at least one word of even length? " ++ show acceptsEven
