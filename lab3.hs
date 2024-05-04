@@ -64,7 +64,7 @@ main :: IO ()
 main = do
   alphabet <- readAlphabet "alphabet.txt"
   transitions1 <- readTransitions "transitions.txt"
-  finalStates1 <- readFinalStates "finalstates2.txt"
+  finalStates1 <- readFinalStates "finalstates.txt"
   let automaton = Automaton
         { transitions = transitions1,
           initialState = "0",

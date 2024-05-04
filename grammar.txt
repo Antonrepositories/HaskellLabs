@@ -4,3 +4,6 @@ A>bB
 B>aR
 C>R
 R>r
+K>A
+B>M
+M>Nb
